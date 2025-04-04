@@ -7,7 +7,11 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
-@ImportResource({"classpath:spring/application-config.xml", "classpath:spring/mvc-config.xml"})
+@ImportResource({
+    "classpath:spring/application-config.xml", 
+    "classpath:spring/mvc-config.xml",
+    "classpath:spring/datasource-config.xml"
+})
 public class Main extends SpringBootServletInitializer {
 
     @Override

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- DataSource Configuration -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.postgresql.Driver" />
+        <property name="url" value="jdbc:postgresql://localhost:5432/studentmarks" />
+        <property name="username" value="postgres" />
+        <property name="password" value="postgres" />
+    </bean>
+
+    <!-- JdbcTemplate Configuration -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <!-- DAO Beans -->
+    <bean id="studentDao" class="com.bnpp.pb.lynx.dao.impl.StudentDaoImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+
+    <bean id="subjectDao" class="com.bnpp.pb.lynx.dao.impl.SubjectDaoImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+
+    <bean id="marksDao" class="com.bnpp.pb.lynx.dao.impl.MarksDaoImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+
+    <!-- Service Beans -->
+    <bean id="studentService" class="com.bnpp.pb.lynx.service.impl.StudentServiceImpl">
+        <property name="studentDao" ref="studentDao" />
+    </bean>
+
+    <bean id="subjectService" class="com.bnpp.pb.lynx.service.impl.SubjectServiceImpl">
+        <property name="subjectDao" ref="subjectDao" />
+    </bean>
+
+    <bean id="marksService" class="com.bnpp.pb.lynx.service.impl.MarksServiceImpl">
+        <property name="marksDao" ref="marksDao" />
+    </bean>
+</beans> 

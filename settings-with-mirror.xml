@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <!-- Multiple mirror options -->
+  <mirrors>
+    <!-- Option 1: Use Aliyun's Maven repository (fast in Asia) -->
+    <mirror>
+      <id>aliyun-maven</id>
+      <mirrorOf>central</mirrorOf>
+      <name>Aliyun Maven</name>
+      <url>https://maven.aliyun.com/repository/public</url>
+    </mirror>
+    
+    <!-- Option 2: Use Google's Maven repository -->
+    <mirror>
+      <id>google-maven</id>
+      <mirrorOf>central</mirrorOf>
+      <name>Google Maven</name>
+      <url>https://maven.google.com</url>
+      <mirrorOf>central</mirrorOf>
+    </mirror>
+    
+    <!-- Option 3: Use JBoss repository -->
+    <mirror>
+      <id>jboss-public-repository</id>
+      <mirrorOf>central</mirrorOf>
+      <name>JBoss Public Repository</name>
+      <url>https://repository.jboss.org/nexus/content/groups/public-jboss</url>
+    </mirror>
+  </mirrors>
+</settings> 

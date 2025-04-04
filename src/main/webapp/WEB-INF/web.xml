@@ -25,7 +25,10 @@
     <!-- Spring Root Context -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:spring/application-config.xml</param-value>
+        <param-value>
+            classpath:spring/application-config.xml
+            classpath:spring/datasource-config.xml
+        </param-value>
     </context-param>
     
     <listener>
