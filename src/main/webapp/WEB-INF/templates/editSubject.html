@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Edit Subject - Student Marks Management System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+    <div class="header">
+        <h1>Student Marks Management System</h1>
+    </div>
+    
+    <div class="navbar">
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/students}">Students</a></li>
+            <li><a th:href="@{/subjects}">Subjects</a></li>
+            <li><a th:href="@{/marks}">Marks</a></li>
+            <li><a th:href="@{/viewMarks}">View Marks</a></li>
+            <li><a th:href="@{/topRankers}">Top Rankers</a></li>
+        </ul>
+    </div>
+    
+    <div class="container">
+        <h2>Edit Subject</h2>
+        
+        <div class="form-container">
+            <form th:action="@{/subjects/{id}(id=${subject.subjectId})}" th:object="${subject}" method="post">
+                <input type="hidden" th:field="*{subjectId}"/>
+                <div class="form-group">
+                    <label for="subjectName">Subject Name:</label>
+                    <input type="text" id="subjectName" th:field="*{subjectName}" class="form-control" required="required"/>
+                </div>
+                <button type="submit" class="btn">Update Subject</button>
+                <a th:href="@{/subjects}" class="btn">Cancel</a>
+            </form>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>&copy; 2023 Student Marks Management System</p>
+    </div>
+</body>
+</html> 

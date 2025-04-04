@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Manage Students - Student Marks Management System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+    <div class="header">
+        <h1>Student Marks Management System</h1>
+    </div>
+    
+    <div class="navbar">
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/students}">Students</a></li>
+            <li><a th:href="@{/subjects}">Subjects</a></li>
+            <li><a th:href="@{/marks}">Marks</a></li>
+            <li><a th:href="@{/viewMarks}">View Marks</a></li>
+            <li><a th:href="@{/topRankers}">Top Rankers</a></li>
+        </ul>
+    </div>
+    
+    <div class="container">
+        <h2>Manage Students</h2>
+        
+        <div class="form-container">
+            <h3>Add New Student</h3>
+            <form th:action="@{/students}" th:object="${student}" method="post">
+                <div class="form-group">
+                    <label for="rollNumber">Roll Number:</label>
+                    <input type="text" id="rollNumber" th:field="*{rollNumber}" class="form-control" required="required"/>
+                </div>
+                <div class="form-group">
+                    <label for="name">Student Name:</label>
+                    <input type="text" id="name" th:field="*{name}" class="form-control" required="required"/>
+                </div>
+                <button type="submit" class="btn">Add Student</button>
+            </form>
+        </div>
+        
+        <h3>Student List</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Roll Number</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="student : ${students}">
+                    <td th:text="${student.rollNumber}">S001</td>
+                    <td th:text="${student.name}">John Doe</td>
+                    <td>
+                        <a th:href="@{/students/{rollNumber}/edit(rollNumber=${student.rollNumber})}" class="btn">Edit</a>
+                        <a th:href="@{/students/{rollNumber}/delete(rollNumber=${student.rollNumber})}" class="btn btn-danger" 
+                           onclick="return confirm('Are you sure you want to delete this student?')">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="footer">
+        <p>&copy; 2023 Student Marks Management System</p>
+    </div>
+</body>
+</html> 

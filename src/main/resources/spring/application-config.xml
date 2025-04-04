@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- Enable Transaction Manager -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    
+    <!-- Controllers -->
+    <bean id="homeController" class="com.bnpp.pb.lynx.controller.HomeController" />
+    
+    <bean id="studentController" class="com.bnpp.pb.lynx.controller.StudentController">
+        <property name="studentService" ref="studentService"/>
+    </bean>
+    
+    <bean id="subjectController" class="com.bnpp.pb.lynx.controller.SubjectController">
+        <property name="subjectService" ref="subjectService"/>
+    </bean>
+    
+    <bean id="marksController" class="com.bnpp.pb.lynx.controller.MarksController">
+        <property name="marksService" ref="marksService"/>
+        <property name="studentService" ref="studentService"/>
+        <property name="subjectService" ref="subjectService"/>
+    </bean>
+    
+</beans> 

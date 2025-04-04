@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Manage Marks - Student Marks Management System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+    <div class="header">
+        <h1>Student Marks Management System</h1>
+    </div>
+    
+    <div class="navbar">
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/students}">Students</a></li>
+            <li><a th:href="@{/subjects}">Subjects</a></li>
+            <li><a th:href="@{/marks}">Marks</a></li>
+            <li><a th:href="@{/viewMarks}">View Marks</a></li>
+            <li><a th:href="@{/topRankers}">Top Rankers</a></li>
+        </ul>
+    </div>
+    
+    <div class="container">
+        <h2>Manage Marks</h2>
+        
+        <div class="form-container">
+            <h3>Add New Marks</h3>
+            <form th:action="@{/marks}" th:object="${marks}" method="post">
+                <div class="form-group">
+                    <label for="rollNumber">Student:</label>
+                    <select id="rollNumber" th:field="*{rollNumber}" class="form-control" required="required">
+                        <option value="">-- Select Student --</option>
+                        <option th:each="student : ${students}" th:value="${student.rollNumber}" th:text="${student.name + ' (' + student.rollNumber + ')'}">John Doe (S001)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="examType">Exam Type:</label>
+                    <select id="examType" th:field="*{examType}" class="form-control" required="required">
+                        <option value="">-- Select Exam Type --</option>
+                        <option th:each="examType : ${examTypes}" th:value="${examType}" th:text="${examType.displayName}">Monthly</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="subjectId">Subject:</label>
+                    <select id="subjectId" th:field="*{subjectId}" class="form-control" required="required">
+                        <option value="">-- Select Subject --</option>
+                        <option th:each="subject : ${subjects}" th:value="${subject.subjectId}" th:text="${subject.subjectName}">Mathematics</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="marks">Marks:</label>
+                    <input type="number" id="marks" th:field="*{marks}" class="form-control" min="0" max="100" required="required"/>
+                </div>
+                <button type="submit" class="btn">Add Marks</button>
+            </form>
+        </div>
+        
+        <h3>Marks List</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Student</th>
+                    <th>Exam Type</th>
+                    <th>Subject</th>
+                    <th>Marks</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="mark : ${marksList}">
+                    <td th:text="${mark.markId}">1</td>
+                    <td th:text="${mark.rollNumber}">S001</td>
+                    <td th:text="${mark.examType}">Monthly</td>
+                    <td th:text="${mark.subjectId}">1</td>
+                    <td th:text="${mark.marks}">85</td>
+                    <td>
+                        <a th:href="@{/marks/{id}/edit(id=${mark.markId})}" class="btn">Edit</a>
+                        <a th:href="@{/marks/{id}/delete(id=${mark.markId})}" class="btn btn-danger" 
+                           onclick="return confirm('Are you sure you want to delete this marks entry?')">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="footer">
+        <p>&copy; 2023 Student Marks Management System</p>
+    </div>
+</body>
+</html> 
